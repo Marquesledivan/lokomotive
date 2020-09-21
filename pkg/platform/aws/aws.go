@@ -109,6 +109,7 @@ func NewConfig() *config {
 		Region:             "eu-central-1",
 		EnableAggregation:  true,
 		EnableTLSBootstrap: true,
+		NetworkMTU:         1480, //nolint:gomnd
 	}
 }
 

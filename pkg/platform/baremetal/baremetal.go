@@ -90,6 +90,7 @@ func NewConfig() *config {
 		OSChannel:          "flatcar-stable",
 		OSVersion:          "current",
 		EnableTLSBootstrap: true,
+		NetworkMTU:         1480, //nolint:gomnd
 	}
 }
 

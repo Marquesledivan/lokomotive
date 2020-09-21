@@ -122,6 +122,7 @@ func NewConfig() *config {
 	return &config{
 		EnableAggregation:  true,
 		EnableTLSBootstrap: true,
+		NetworkMTU:         1480, //nolint:gomnd
 	}
 }
 

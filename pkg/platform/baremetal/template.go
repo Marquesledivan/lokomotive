@@ -32,6 +32,9 @@ module "bare-metal-{{.ClusterName}}" {
 
   {{- if .EncryptPodTraffic }}
   encrypt_pod_traffic = {{ .EncryptPodTraffic }}
+  network_mtu = {{ .NetworkMTU }} - 40 # Wireguard overhead
+  {{- else }}
+  network_mtu = {{ .NetworkMTU }}
   {{- end }}
 
   # configuration
@@ -47,10 +50,6 @@ module "bare-metal-{{.ClusterName}}" {
   worker_names       = {{.WorkerNames}}
   worker_macs        = {{.WorkerMacs}}
   worker_domains     = {{.WorkerDomains}}
-
-  {{- if .NetworkMTU }}
-  network_mtu = {{ .NetworkMTU }}
-  {{- end }}
 
   {{- if .KubeAPIServerExtraFlags }}
   kube_apiserver_extra_flags = [

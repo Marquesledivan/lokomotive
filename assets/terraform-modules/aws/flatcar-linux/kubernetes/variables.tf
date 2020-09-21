@@ -113,7 +113,6 @@ variable "asset_dir" {
 variable "network_mtu" {
   description = "CNI interface MTU. Use 8981 if using instances types with Jumbo frames."
   type        = number
-  default     = 1480
 }
 
 variable "host_cidr" {

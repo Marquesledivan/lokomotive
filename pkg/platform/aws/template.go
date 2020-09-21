@@ -42,9 +42,6 @@ module "aws-{{.Config.ClusterName}}" {
   controller_type  = "{{.Config.ControllerType}}"
  {{- end }}
 
-  {{- if .Config.NetworkMTU }}
-  network_mtu = {{.Config.NetworkMTU}}
-  {{- end }}
   enable_reporting = {{.Config.EnableReporting}}
   {{- if .Config.PodCIDR }}
   pod_cidr = "{{.Config.PodCIDR}}"
@@ -100,6 +97,9 @@ module "aws-{{.Config.ClusterName}}" {
 
   {{- if .Config.EncryptPodTraffic }}
   encrypt_pod_traffic = {{.Config.EncryptPodTraffic}}
+  network_mtu = {{ .Config.NetworkMTU }} - 40 # Wireguard overhead
+  {{- else }}
+  network_mtu = {{ .Config.NetworkMTU }}
   {{- end }}
 
   worker_bootstrap_tokens = [

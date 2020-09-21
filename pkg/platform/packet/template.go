@@ -55,9 +55,6 @@ module "packet-{{.Config.ClusterName}}" {
 
   enable_aggregation = {{.Config.EnableAggregation}}
 
-  {{- if .Config.NetworkMTU }}
-  network_mtu = {{.Config.NetworkMTU}}
-  {{- end }}
   enable_reporting = {{.Config.EnableReporting}}
 
   {{- if .Config.PodCIDR }}
@@ -115,6 +112,9 @@ EOF
 
   {{- if .Config.EncryptPodTraffic }}
   encrypt_pod_traffic = {{.Config.EncryptPodTraffic}}
+  network_mtu = {{ .Config.NetworkMTU }} - 40 # Wireguard overhead
+  {{- else }}
+  network_mtu = {{ .Config.NetworkMTU }}
   {{- end }}
 
   worker_bootstrap_tokens = [
