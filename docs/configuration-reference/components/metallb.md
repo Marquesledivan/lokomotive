@@ -77,6 +77,9 @@ component "metallb" {
 
 MetalLB will use the specified CIDR for exposing services of type `LoadBalancer`.
 
+>NOTE: The official MetalLB [documentation](https://metallb.universe.tf/) contains information
+>regarding advanced configuration, usage and more.
+
 ## Attribute reference
 
 Table of all the arguments accepted by the component.
