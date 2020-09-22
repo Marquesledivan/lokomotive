@@ -62,6 +62,34 @@ component "prometheus-operator" {
 }`,
 			wantErr: true,
 		},
+		{
+			desc: "prometheus ingress and external_url given and are different",
+			hcl: `
+component "prometheus-operator" {
+  prometheus {
+	external_url = "https://prometheus.notmydomain.net"
+    ingress {
+      host = "prometheus.mydomain.net"
+    }
+  }
+}
+`,
+			wantErr: true,
+		},
+		{
+			desc: "prometheus ingress and external_url given and are same",
+			hcl: `
+component "prometheus-operator" {
+  prometheus {
+	external_url = "https://prometheus.mydomain.net"
+    ingress {
+      host = "prometheus.mydomain.net"
+    }
+  }
+}
+`,
+			wantErr: false,
+		},
 	}
 
 	for _, tc := range tests {
